@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  background: black;
+  color: white;
+}
+.logo {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.logo:hover {
+  color: #0ea5e9;
+}
