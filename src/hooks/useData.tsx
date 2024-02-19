@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 const useData = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  
   const callData = async () => {
     const response = await axios.get(
       "https://api.github.com/users/sudhanshu042004",
@@ -11,6 +12,7 @@ const useData = () => {
     setData(response.data);
     setLoading(false);
   };
+  
   useEffect(() => {
     try {
       callData();

@@ -4,6 +4,7 @@ import Skeleton from "@mui/material/Skeleton";
 const SkeletonUse = () => {
   return (
     <div>
+      SkeletonUse
       <Skeleton
         variant="circular"
         sx={{ backgroundColor: "#18181b" }}

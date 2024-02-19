@@ -1,6 +1,7 @@
 import React from "react";
 import useData from "../hooks/useData";
 import SkeletonUse from "./skeleton";
+import useReposData from "../hooks/useReposData";
 
 // type dataValidation = {
 //   data: [html_url: string, avatar_url: string, name: string, bio: string];
@@ -9,9 +10,13 @@ import SkeletonUse from "./skeleton";
 
 const AboutMe = () => {
   const { data, loading } = useData();
+  const { repoData, languagesData } = useReposData();
+  console.log(languagesData);
+  
   if (loading) {
     return <SkeletonUse />;
   }
+
   return (
     <div className="flex justify-between">
       <div className="m-5 w-[50rem]">
