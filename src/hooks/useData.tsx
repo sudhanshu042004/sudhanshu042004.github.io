@@ -12,13 +12,11 @@ const useData = () => {
     setLoading(false);
   };
   useEffect(() => {
-    setTimeout(() => {
-      try {
-        callData();
-      } catch (err) {
-        console.log(`erorr comes up while fetching data : ${err}`);
-      }
-    }, 5000);
+    try {
+      callData();
+    } catch (err) {
+      console.log(`erorr comes up while fetching data : ${err}`);
+    }
   }, []);
 
   return { data, loading };
