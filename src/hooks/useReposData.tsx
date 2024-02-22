@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
+const token = import.meta.env.VITE_API_KEY;
+
 interface UserLanguages {
   [key: string]: number;
 }
@@ -14,6 +16,7 @@ const useReposData = () => {
     try {
       const responseData = await axios.get(
         "https://api.github.com/users/sudhanshu042004/repos",
+        { headers: { Authorization: token } },
       );
       const fetchedData = responseData.data;
       setRepoData(fetchedData);
@@ -23,6 +26,7 @@ const useReposData = () => {
         const repoName = repo.name;
         const languagesResponse = await axios.get(
           `https://api.github.com/repos/sudhanshu042004/${repoName}/languages`,
+          { headers: { Authorization: token } },
         );
         const languages: UserLanguages = languagesResponse.data;
         for (const [language, bytesCount] of Object.entries(languages)) {
@@ -51,7 +55,6 @@ const useReposData = () => {
 };
 
 export default useReposData;
-
 
 // {
 //   "JavaScript": 74869,
