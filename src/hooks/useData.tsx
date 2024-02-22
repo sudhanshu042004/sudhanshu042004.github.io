@@ -6,17 +6,18 @@ const useData = () => {
   const [loading, setLoading] = useState(true);
 
   const callData = async () => {
+    console.log(token);
     const response = await axios.get(
       "https://api.github.com/users/sudhanshu042004",
-      { headers: { Authorization: token } },
+      { headers: { Authorization: `token ${token}` } },
     );
     setData(response.data);
-    setLoading(false);
   };
 
   useEffect(() => {
     try {
       callData();
+      setLoading(false);
     } catch (err) {
       console.log(`erorr comes up while fetching data : ${err}`);
     }

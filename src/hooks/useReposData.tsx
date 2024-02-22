@@ -10,13 +10,13 @@ interface UserLanguages {
 const useReposData = () => {
   const [repoData, setRepoData] = useState([]);
   const [languagesData, setLanguagesData] = useState({});
-  const [loading, setLoading] = useState(true);
+  const [langLoading, setLangLoading] = useState(true);
 
   const fetchingData = async () => {
     try {
       const responseData = await axios.get(
         "https://api.github.com/users/sudhanshu042004/repos",
-        { headers: { Authorization: token } },
+        { headers: { Authorization: `token ${token}` } },
       );
       const fetchedData = responseData.data;
       setRepoData(fetchedData);
@@ -24,9 +24,13 @@ const useReposData = () => {
 
       for (const repo of fetchedData) {
         const repoName = repo.name;
+
+        if (repo.fork) {
+          continue;
+        }
         const languagesResponse = await axios.get(
           `https://api.github.com/repos/sudhanshu042004/${repoName}/languages`,
-          { headers: { Authorization: token } },
+          { headers: { Authorization: `token ${token}` } },
         );
         const languages: UserLanguages = languagesResponse.data;
         for (const [language, bytesCount] of Object.entries(languages)) {
@@ -34,12 +38,9 @@ const useReposData = () => {
           userLanguages[language] = (userLanguages[language] || 0) + count;
         }
         setLanguagesData(userLanguages);
-        setLoading(false);
       }
     } catch (err) {
       console.log(`err comes up while fetching languagesData : ${err}`);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -48,10 +49,10 @@ const useReposData = () => {
       fetchingData();
     } catch (err) {
       console.log(`error comes while getting languages : ${err}`);
-      setLoading(false);
+      setLangLoading(false);
     }
   }, []);
-  return { repoData, languagesData, loading };
+  return { repoData, languagesData, langLoading };
 };
 
 export default useReposData;
