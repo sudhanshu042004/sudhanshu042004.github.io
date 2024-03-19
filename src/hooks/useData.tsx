@@ -2,11 +2,10 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 const token = import.meta.env.VITE_API_KEY;
 const useData = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
 
   const callData = async () => {
-    console.log(token);
     const response = await axios.get(
       "https://api.github.com/users/sudhanshu042004",
       { headers: { Authorization: `token ${token}` } },

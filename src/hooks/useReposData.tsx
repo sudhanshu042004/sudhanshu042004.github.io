@@ -38,15 +38,19 @@ const useReposData = () => {
           userLanguages[language] = (userLanguages[language] || 0) + count;
         }
         setLanguagesData(userLanguages);
+        
       }
     } catch (err) {
       console.log(`err comes up while fetching languagesData : ${err}`);
+    } finally {
+      setLangLoading(false);
     }
   };
 
   useEffect(() => {
     try {
       fetchingData();
+      
     } catch (err) {
       console.log(`error comes while getting languages : ${err}`);
       setLangLoading(false);
